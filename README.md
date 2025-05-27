@@ -14,7 +14,7 @@
 <h3>Servidor de configuracao - Config Server</h3>
 <p>O servidor de configuracao e um padrao que busca a externalizacao das configuracoes das aplicacoes de modo que todas
 ficam centralizadas em um determinado recurso da arquitetura.</p>
-<p>Uma das implementacoes desse design pattern e o Spring Config Server. Este possui diversos artefatos desde um diretororio no servidor ate repositorios Git, Amazon S3, banco de dados entre outros. Tambem possui funcionalidades como reaproveitamento de properties entre aplicacoes e atulizacao de properties sem a necessidade de reiniciar o servico.</p>
+<p>Uma das implementacoes desse design pattern e o Spring Config Server. Este possui diversos artefatos desde um diretororio no servidor ate repositorios Git, Amazon S3, banco de dados entre outros. Tambem possui funcionalidades como reaproveitamento de properties entre aplicacoes e atualizacao de properties sem a necessidade de reiniciar o servico.</p>
 <h4>Iniciando Spring Config Server</h4>
 <p>Sao necessarias 3 dependencias para rodar o config server com Spring:
   <ul>
