@@ -25,7 +25,7 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 <p>Proximo passo e necessario definir a anotacao <strong>@EnableConfigServer</strong> na classe principal do projeto do projeto Spring</p>
 <p>Seguindo no application.properties sera definida as configuracoes de acesso ao repositorio GIT:
   <p align="center">
-  <img src="images/application-01.png" width="200" alt="Logo do projeto">
+  <img src="images/application-01.png" width="400" alt="Logo do projeto">
 </p>
   Importante notar que usuario e senha estao sendo passados via variaveis de ambiente para nao expormos nosso usuario e senha no repositorio.
 </p>
