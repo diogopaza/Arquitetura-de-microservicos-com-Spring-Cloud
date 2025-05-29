@@ -29,5 +29,15 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 </p>
   Importante notar que usuario e senha estao sendo passados via variaveis de ambiente para nao expormos nosso usuario e senha no repositorio.
 </p>
+</p>
+
+<h3>Padrao Arquitetura - Service Discovery</h3>
+<p>Uma das implementacoes desse padrao e o Spring Cloud Eureka Server. O primeiro passo e baixar a dependencia abaixo e habilitar a anotacao 
+  <strong>@EnableEurekaServer</strong> na classe principal do projeto.:
+   <ul>
+    <li>spring-cloud-starter-netflix-eureka-server</li>
+   
+  </ul>
 
 </p>
+
