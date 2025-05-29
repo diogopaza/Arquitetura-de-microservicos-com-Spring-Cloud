@@ -41,3 +41,6 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 
 </p>
 
+<h4>Microservicos para teste do projeto</h4>
+<p>O primeiro microsservico sera o de pedido, alem desse teremos o de pagamentos usando comunicacao sincrona e o de emails usando comunicacao assincrona.</p>
+
