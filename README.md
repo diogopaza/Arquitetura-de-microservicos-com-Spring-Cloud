@@ -38,6 +38,7 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
     <li>spring-cloud-starter-netflix-eureka-server</li>
    
   </ul>
+  <p>O Eureka Server e o responsavel por registrar os microservicos de dominio (pedidos, pagamentos, emails). Dessa forma nao e preciso saber em qual porta cada microservico inicializou e nem quantas instancias desse microservicos esta rodando.</p>
 
 </p>
 
