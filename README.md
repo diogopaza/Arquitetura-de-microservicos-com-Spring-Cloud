@@ -1,16 +1,82 @@
 # Arquitetura-de-microservicos-com-Spring-Cloud
 
-<p>Este repositorio ter por objetivo criar um projeto para usar ferramentas do ecossistema Spring Cloud:
-<ul>
-  <li>Eureka: descoberta de servicos</li>
-  <li>Spring Cloud Config: configuracao centralizada</li>
-  <li>Circuit Breaker (fallback e etc) e Resiliencia</li>
-  <li>Gateway (com LoadBalancer)</li>
-  <li>RabbitMQ</li>
-  
-</ul>
+# 🗺️ Plano de Evolução Progressiva para Microsserviços — Escalonado e Completo
 
-</p>
+Este roadmap tem como objetivo construir uma arquitetura de microsserviços robusta, escalável e alinhada com as melhores práticas do mercado, utilizando o ecossistema **Spring Cloud**. O plano é dividido em etapas crescentes, começando de um projeto simples até uma solução corporativa completa.
+
+---
+
+## 🔥 Fase 1 — Infraestrutura Base
+
+- ✅ **Config Server** (Configuração Centralizada)
+- ✅ **Eureka Server** (Service Discovery)
+- ✅ **Gateway API** (Roteamento e Balanceamento)
+- ✅ **Primeiro microserviço:** `pedido-service`
+  - Arquitetura inicial em **camadas (Controller, Service, Repository)**
+
+---
+
+## 🔗 Fase 2 — Comunicação entre Microsserviços
+
+- ✅ **Feign Client** (Comunicação síncrona simplificada)
+- ✅ **RabbitMQ** (Mensageria e comunicação assíncrona)
+- ✅ Definir contratos básicos para interações síncronas e assíncronas
+
+---
+
+## 🏗️ Fase 3 — Evolução para Arquitetura Hexagonal
+
+- 🔄 Refatoração dos microsserviços para o padrão **Ports and Adapters**
+- 🔄 Separação clara entre:
+  - **Domínio (Core):** entidades, regras e serviços de domínio
+  - **Adapters de Entrada:** REST API, mensageria, etc.
+  - **Adapters de Saída:** Banco de dados, clients Feign, filas, etc.
+
+---
+
+## 🔍 Fase 4 — Observabilidade e Resiliência
+
+- 🔧 **Circuit Breaker:** Resilience4j
+- 🔧 **Retry e Timeouts configuráveis**
+- 🔧 **Distributed Tracing:** Spring Cloud Sleuth + Zipkin
+- 🔧 **Monitoramento:** Prometheus + Grafana
+- 🔧 **Health Check:** Actuator + endpoints
+
+---
+
+## 🔐 Fase 5 — Segurança
+
+- 🛡️ **JWT no API Gateway**
+- 🛡️ Segurança nos microsserviços com autenticação e autorização
+- 🛡️ HTTPS / SSL
+- 🛡️ Integração com **Keycloak** ou outro Identity Provider
+
+---
+
+## 🚀 Fase 6 — Deployment e Escalabilidade
+
+- 🐳 **Docker:** Containerização dos serviços
+- ☸️ **Kubernetes (K8s):** Orquestração e escalabilidade
+- 🔄 **CI/CD:** GitHub Actions, GitLab CI, Jenkins ou outra ferramenta
+- 🌍 Ambientes separados (**dev**, **staging**, **production**)
+
+---
+
+## ✅ Fase 7 — Testes Automatizados
+
+- 🧪 **Testes Unitários:** JUnit + Mockito
+- 🔗 **Testes de Integração:** Testcontainers
+- 📜 **Testes de Contrato:** Spring Cloud Contract
+- 🔄 **Testes End-to-End (E2E):** Postman/Newman, Selenium, Cypress ou outros
+
+---
+
+## 🚧 Próximos passos
+
+> Cada fase será registrada neste repositório, com exemplos práticos, documentação, desafios e melhorias contínuas.
+
+---
+
 <h3>Servidor de configuracao - Config Server</h3>
 <p>O servidor de configuracao e um padrao que busca a externalizacao das configuracoes das aplicacoes de modo que todas
 ficam centralizadas em um determinado recurso da arquitetura.</p>
