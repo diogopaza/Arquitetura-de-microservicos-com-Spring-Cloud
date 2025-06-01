@@ -44,4 +44,5 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 
 <h4>Microservicos para teste do projeto</h4>
 <p>O primeiro microsservico sera o de pedido, alem desse teremos o de pagamentos usando comunicacao sincrona e o de emails usando comunicacao assincrona.</p>
+<p>Inicialmente o microservico pedidiso ira implementar uma arquitetura baseada em camadas para iniciar o projeto e depois sera refatorado para a arquitetura hexagonal.</p>
 
