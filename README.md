@@ -1,81 +1,203 @@
 # Arquitetura-de-microservicos-com-Spring-Cloud
 
-# 🗺️ Plano de Evolução Progressiva para Microsserviços — Escalonado e Completo
 
-Este roadmap tem como objetivo construir uma arquitetura de microsserviços robusta, escalável e alinhada com as melhores práticas do mercado, utilizando o ecossistema **Spring Cloud**. O plano é dividido em etapas crescentes, começando de um projeto simples até uma solução corporativa completa.
+# 🚀 Plano de Evolução Progressiva para Microsserviços — Com Roteiro de Testes Práticos
 
----
+## 🏗️ Fase 1 — Arquitetura Básica Funcional (Fundação)
 
-## 🔥 Fase 1 — Infraestrutura Base
+### ✅ O que implementar:
+- Config Server
+- Eureka Server
+- Gateway
+- Microsserviço de Pedidos (`pedido-service`) com arquitetura em camadas (`controller → service → repository`).
 
-- ✅ **Config Server** (Configuração Centralizada)
-- ✅ **Eureka Server** (Service Discovery)
-- ✅ **Gateway API** (Roteamento e Balanceamento)
-- ✅ **Primeiro microserviço:** `pedido-service`
-  - Arquitetura inicial em **camadas (Controller, Service, Repository)**
+### 🧪 Roteiro de Testes:
 
----
+#### 🔗 Teste 1 — Eureka funcionando
+- Acesse `http://localhost:8761`
+- **Esperado:** Veja o `pedido-service`, `gateway` e `config-server` registrados.
 
-## 🔗 Fase 2 — Comunicação entre Microsserviços
+#### 🔧 Teste 2 — Gateway funcionando
+- No Postman ou navegador:
+```
+GET http://localhost:8080/pedido-service/actuator/health
+```
+- **Esperado:** `{ "status": "UP" }`
 
-- ✅ **Feign Client** (Comunicação síncrona simplificada)
-- ✅ **RabbitMQ** (Mensageria e comunicação assíncrona)
-- ✅ Definir contratos básicos para interações síncronas e assíncronas
+#### 🗂️ Teste 3 — Configuração centralizada
+- Pare o `Config Server` e suba o `pedido-service`.
+- **Esperado:** O `pedido-service` não sobe, erro relacionado a `Config Server not available`.
 
----
-
-## 🏗️ Fase 3 — Evolução para Arquitetura Hexagonal
-
-- 🔄 Refatoração dos microsserviços para o padrão **Ports and Adapters**
-- 🔄 Separação clara entre:
-  - **Domínio (Core):** entidades, regras e serviços de domínio
-  - **Adapters de Entrada:** REST API, mensageria, etc.
-  - **Adapters de Saída:** Banco de dados, clients Feign, filas, etc.
-
----
-
-## 🔍 Fase 4 — Observabilidade e Resiliência
-
-- 🔧 **Circuit Breaker:** Resilience4j
-- 🔧 **Retry e Timeouts configuráveis**
-- 🔧 **Distributed Tracing:** Spring Cloud Sleuth + Zipkin
-- 🔧 **Monitoramento:** Prometheus + Grafana
-- 🔧 **Health Check:** Actuator + endpoints
-
----
-
-## 🔐 Fase 5 — Segurança
-
-- 🛡️ **JWT no API Gateway**
-- 🛡️ Segurança nos microsserviços com autenticação e autorização
-- 🛡️ HTTPS / SSL
-- 🛡️ Integração com **Keycloak** ou outro Identity Provider
+#### 🔨 Teste 4 — CRUD básico do pedido
+- No Postman:
+```
+POST http://localhost:8080/pedido-service/api/pedidos
+Body:
+{
+  "descricao": "Teste de pedido",
+  "valor": 120.0
+}
+```
+- **Esperado:** Código 201 Created, e resposta com o objeto salvo (ID preenchido).
+- Valide com:
+```
+GET http://localhost:8080/pedido-service/api/pedidos
+```
+- **Esperado:** Lista com seu pedido criado.
 
 ---
 
-## 🚀 Fase 6 — Deployment e Escalabilidade
+## 🔄 Fase 2 — Comunicação entre Microsserviços
 
-- 🐳 **Docker:** Containerização dos serviços
-- ☸️ **Kubernetes (K8s):** Orquestração e escalabilidade
-- 🔄 **CI/CD:** GitHub Actions, GitLab CI, Jenkins ou outra ferramenta
-- 🌍 Ambientes separados (**dev**, **staging**, **production**)
+### ✅ O que implementar:
+- Microsserviço de Pagamentos (**REST — síncrono**)
+- Microsserviço de Emails (**RabbitMQ — assíncrono**)
+- RabbitMQ configurado
+
+### 🧪 Roteiro de Testes:
+
+#### 🔗 Teste 1 — Comunicação síncrona Pedido ↔️ Pagamento
+- No Postman:
+```
+POST http://localhost:8080/pedido-service/api/pedidos/1/pagar
+```
+- **Esperado:** Pedido atualizado como `PAGO`. Verifique logs do `pagamento-service`.
+
+#### 📨 Teste 2 — Comunicação assíncrona Pedido → Email via RabbitMQ
+- Ao criar um pedido:
+```
+POST http://localhost:8080/pedido-service/api/pedidos
+```
+- **Esperado:** No log do email-service: `[EMAIL] Enviando email de confirmação para pedido ID: X`.
+- Verifique no RabbitMQ Management (`http://localhost:15672`) se as filas estão processando.
 
 ---
 
-## ✅ Fase 7 — Testes Automatizados
+## 🔗 Fase 3 — Resiliência e Observabilidade
 
-- 🧪 **Testes Unitários:** JUnit + Mockito
-- 🔗 **Testes de Integração:** Testcontainers
-- 📜 **Testes de Contrato:** Spring Cloud Contract
-- 🔄 **Testes End-to-End (E2E):** Postman/Newman, Selenium, Cypress ou outros
+### ✅ O que implementar:
+- Circuit Breaker com Resilience4j
+- Retry, Timeout e Fallback
+- Monitoramento com Actuator, Prometheus e Zipkin
+
+### 🧪 Roteiro de Testes:
+
+#### ⚠️ Teste 1 — Circuit Breaker
+- Desligue o `pagamento-service`.
+- No Postman:
+```
+POST http://localhost:8080/pedido-service/api/pedidos/1/pagar
+```
+- **Esperado:** Retorno com fallback informando indisponibilidade do pagamento.
+
+#### 🔁 Teste 2 — Retry + Timeout
+- Simule lentidão no pagamento-service.
+- Verifique nos logs do pedido-service os retries e timeout.
+
+#### 🔎 Teste 3 — Traceabilidade
+- Gere uma requisição e acompanhe o trace no Zipkin (`http://localhost:9411`).
 
 ---
 
-## 🚧 Próximos passos
+## 🧠 Fase 4 — Arquitetura Hexagonal
 
-> Cada fase será registrada neste repositório, com exemplos práticos, documentação, desafios e melhorias contínuas.
+### ✅ O que implementar:
+- Refatoração para arquitetura Hexagonal
+- Criação dos módulos: Domain, Application, Adapters
+
+### 🧪 Roteiro de Testes:
+
+#### ✅ Teste 1 — Validação funcional após refatoração
+- Execute os mesmos testes de CRUD da Fase 1 e integração da Fase 2.
+
+#### 🧠 Teste 2 — Teste Unitário orientado a domínio
+```java
+Pedido pedido = new Pedido();
+pedido.marcarComoPago();
+assertTrue(pedido.isPago());
+```
 
 ---
+
+## 🔒 Fase 5 — Segurança
+
+### ✅ O que implementar:
+- JWT
+- Spring Security no Gateway e nos serviços
+
+### 🧪 Roteiro de Testes:
+
+#### 🔑 Teste 1 — Obter Token
+```
+POST http://localhost:8080/auth/login
+Body:
+{
+  "username": "admin",
+  "password": "123"
+}
+```
+- **Esperado:** Retorno com JWT.
+
+#### 🔐 Teste 2 — Acesso protegido
+- Sem token → 401 Unauthorized
+- Com token → Acesso permitido
+
+---
+
+## 🚀 Fase 6 — CI/CD e Deploy
+
+### ✅ O que implementar:
+- Pipelines no GitHub Actions
+- Docker Compose
+- Kubernetes
+
+### 🧪 Roteiro de Testes:
+
+#### 🔧 Teste 1 — Build automático no push
+
+#### 🐳 Teste 2 — Docker Compose
+```
+docker-compose up
+```
+
+#### ☸️ Teste 3 — Kubernetes
+```
+kubectl get pods
+kubectl get services
+```
+
+---
+
+## 🌐 Fase 7 — Cloud e Escalabilidade
+
+### 🧪 Roteiro de Testes:
+
+#### 🔥 Teste 1 — Alta disponibilidade
+```
+kubectl scale deployment pedido-service --replicas=3
+```
+
+#### ☁️ Teste 2 — Failover cloud
+
+---
+
+## ✅ Checklist de Validação
+
+| Fase | CRUD | Comunicação | Rabbit | Resiliência | Hexagonal | Segurança | CI/CD | Cloud |
+|------|------|-------------|--------|-------------|-----------|-----------|-------|-------|
+| 1    | 🔥   |             |        |             |           |           |       |       |
+| 2    | 🔥   | 🔥           | 🔥      |             |           |           |       |       |
+| 3    | 🔥   | 🔥           | 🔥      | 🔥           |           |           |       |       |
+| 4    | 🔥   | 🔥           | 🔥      | 🔥           | 🔥         |           |       |       |
+| 5    | 🔥   | 🔥           | 🔥      | 🔥           | 🔥         | 🔥         |       |       |
+| 6    | 🔥   | 🔥           | 🔥      | 🔥           | 🔥         | 🔥         | 🔥     |       |
+| 7    | 🔥   | 🔥           | 🔥      | 🔥           | 🔥         | 🔥         | 🔥     | 🔥     |
+
+---
+
+> Desenvolvido com 💙 para estudos e prática de microsserviços.
+
+------------------------------------------------
 
 <h3>Servidor de configuracao - Config Server</h3>
 <p>O servidor de configuracao e um padrao que busca a externalizacao das configuracoes das aplicacoes de modo que todas
