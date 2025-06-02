@@ -256,7 +256,7 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 </p>
 </p>
 
-<h3>Padrao Arquitetura - Service Discovery</h3>
+<h3>Service Discovery</h3>
 <p>Uma das implementacoes desse padrao e o Spring Cloud Eureka Server. O primeiro passo e baixar a dependencia abaixo e habilitar a anotacao 
   <strong>@EnableEurekaServer</strong> na classe principal do projeto.:
    <ul>
