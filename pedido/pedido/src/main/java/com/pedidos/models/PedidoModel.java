@@ -14,17 +14,17 @@ public class PedidoModel {
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
-    UUID id;
+    private UUID id;
 
     @Column(name = "cliente")
-    String cliente;
+    private String cliente;
 
     @Column(name = "descricao")
-    String descricao;
+    private String descricao;
 
     /*importante notar o uso do BigDecimal pois estamos trabalhando com valores monetarios
     estamos definindo o total de 19 digitos antes e apos a virgula e 2 casas decimais
     */
     @Column(name = "valor", precision = 19, scale = 2)
-    BigDecimal valor;
+    private BigDecimal valor;
 }
