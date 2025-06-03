@@ -270,7 +270,7 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 <h3>Gateway</h3>
 <p>O gateway e um ponto central de entrada, ou seja, os clientes (navegadores, apps, api's) primeiro chegam no gateway e o gateway encaminha a requisicao. As preocupacoes transversais tambem sao mais faceis de implementar, como questoes de segurança, metricas entre outros. A imagem abaixo e um exemplo de implementacao do gateway:
  <p align="center">
-  <img src="images/api-gateway.jpge" width="500" alt="Logo do projeto">
+  <img src="images/api-gateway.jpeg" width="500" alt="Logo do projeto">
 </p>
 
 </p>
