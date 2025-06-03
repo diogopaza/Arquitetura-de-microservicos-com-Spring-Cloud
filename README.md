@@ -267,6 +267,14 @@ ficam centralizadas em um determinado recurso da arquitetura.</p>
 
 </p>
 
+<h3>Gateway</h3>
+<p>O gateway e um ponto central de entrada, ou seja, os clientes (navegadores, apps, api's) primeiro chegam no gateway e o gateway encaminha a requisicao. As preocupacoes transversais tambem sao mais faceis de implementar, como questoes de segurança, metricas entre outros. A imagem abaixo e um exemplo de implementacao do gateway:
+ <p align="center">
+  <img src="images/api-gateway.jpge" width="500" alt="Logo do projeto">
+</p>
+
+</p>
+
 <h4>Microservicos para teste do projeto</h4>
 <p>O primeiro microsservico sera o de pedido, alem desse teremos o de pagamentos usando comunicacao sincrona e o de emails usando comunicacao assincrona.</p>
 <p>Inicialmente o microservico pedidiso ira implementar uma arquitetura baseada em camadas para iniciar o projeto e depois sera refatorado para a arquitetura hexagonal.</p>
