@@ -1,10 +1,10 @@
-package com.pedidos;
+package com.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-//@SpringBootTest
-class PedidosApplicationTests {
+@SpringBootTest
+class GatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

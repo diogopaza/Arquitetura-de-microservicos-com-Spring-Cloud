@@ -12,9 +12,9 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PedidoModel {
 
     @Id
@@ -33,4 +33,6 @@ public class PedidoModel {
     */
     @Column(name = "valor", precision = 19, scale = 2)
     private BigDecimal valor;
+
+
 }

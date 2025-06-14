@@ -14,13 +14,13 @@ public class PedidoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public void salvarPedido (PedidoDto pedidoDto) {
-        this.pedidoRepository.save(PedidoModel.builder()
+    /*public PedidoModel salvarPedido(PedidoDto pedidoDto) {
+        PedidoModel pedido = PedidoModel.builder()
                 .cliente(pedidoDto.cliente())
                 .descricao(pedidoDto.descricao())
                 .valor(pedidoDto.valor())
-                .build()
-        );
-    }
-
+                .build();
+        this.pedidoRepository.save(pedido);
+        return pedido;
+    }*/
 }
