@@ -1,9 +1,11 @@
 package com.pedidos.services;
 
-import com.pedidos.dtos.PedidoDto;
+import com.pedidos.dtos.PedidoRequestDto;
 import com.pedidos.models.PedidoModel;
 import com.pedidos.repositories.PedidoRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PedidoService {
@@ -14,7 +16,7 @@ public class PedidoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    /*public PedidoModel salvarPedido(PedidoDto pedidoDto) {
+    public PedidoModel salvarPedido(PedidoRequestDto pedidoDto) {
         PedidoModel pedido = PedidoModel.builder()
                 .cliente(pedidoDto.cliente())
                 .descricao(pedidoDto.descricao())
@@ -22,5 +24,9 @@ public class PedidoService {
                 .build();
         this.pedidoRepository.save(pedido);
         return pedido;
-    }*/
+    }
+
+    public List<PedidoModel> listarPedidos() {
+        return this.pedidoRepository.findAll();
+    }
 }
